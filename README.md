@@ -2,7 +2,7 @@
 
 <div align="center">
 
-## 🛰️ Transformando dados espaciais em prevenção inteligente
+## 🛰️ Transformando dados espaciais em soluções na Terra!
 
 Sistema preditivo de enchentes urbanas utilizando **Data Science**, **Inteligência Artificial** e **dados espaciais** para gerar alertas preventivos e apoiar decisões estratégicas em tempo real.
 
