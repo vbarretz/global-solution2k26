@@ -13,6 +13,7 @@ Sistema preditivo de enchentes urbanas utilizando **Data Science**, **Inteligên
 ### 🚧O nosso projeto ainda está sendo desenvolvido para a **Global Solution 2026 da FIAP**🚧
 
 O nosso projeto tem o foco na utilização de tecnologias espaciais e análise de dados para solucionar problemas reais enfrentados pela sociedade.
+
 </div>
 
 
