@@ -34,3 +34,15 @@ O nosso projeto tem o foco na utilização de tecnologias espaciais e análise d
 * e **inteligência de dados**.
 
 Tudo isso com o objetivo de transformar informações complexas em decisões rápidas, inteligentes e acessíveis.
+
+---
+
+## 🤝 Contribuição
+
+Sinta-se à vontade para contribuir com melhorias, sugestões ou novas funcionalidades.
+
+---
+
+## 📬 Contato
+
+Caso queira trocar ideias sobre o projeto ou compartilhar feedback, fique à vontade para entrar em contato.
