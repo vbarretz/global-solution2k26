@@ -12,8 +12,8 @@ from datetime import datetime
 # CONFIG
 # ─────────────────────────────────────────────
 st.set_page_config(
-    page_title="FloodVision — Monitoramento de Enchentes",
-    page_icon="🌊",
+    page_title="FloodVision — Inteligência Orbital para Gestão de Desastres",
+    page_icon="🛰️",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -25,26 +25,108 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;600;700&display=swap');
 html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
-.stApp { background-color: #0a0f1e; color: #e2e8f0; }
-[data-testid="stSidebar"] { background-color: #0d1424; border-right: 1px solid #1e2d4a; }
-[data-testid="stMetric"] {
-    background: linear-gradient(135deg, #0d1b2e 0%, #122040 100%);
-    border: 1px solid #1e3a5f; border-radius: 12px; padding: 16px 20px;
+
+/* Fundo com estrelas via gradiente pontilhado */
+.stApp {
+    background-color: #060912;
+    background-image:
+        radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 40% 10%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 25%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 80% 75%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 45%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 15% 80%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 60% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(2px 2px at 35% 55%, rgba(255,140,0,0.2) 0%, transparent 100%),
+        radial-gradient(2px 2px at 75% 15%, rgba(30,120,255,0.2) 0%, transparent 100%),
+        linear-gradient(180deg, #060912 0%, #0a1020 50%, #060c18 100%);
+    color: #e8eaf0;
 }
-[data-testid="stMetricLabel"] { color: #7fa8cc !important; font-size: 0.75rem !important; letter-spacing: 0.1em; text-transform: uppercase; }
-[data-testid="stMetricValue"] { color: #e2f0ff !important; font-family: 'Space Mono', monospace !important; }
+
+[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #080d1a 0%, #0c1528 100%);
+    border-right: 1px solid #ff8c00;
+}
+
+/* Métricas com borda laranja */
+[data-testid="stMetric"] {
+    background: linear-gradient(135deg, #0d1220 0%, #14203a 100%);
+    border: 1px solid rgba(255, 120, 0, 0.4);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 0 12px rgba(255, 100, 0, 0.08);
+}
+[data-testid="stMetricLabel"] { color: #f0a060 !important; font-size: 0.75rem !important; letter-spacing: 0.1em; text-transform: uppercase; }
+[data-testid="stMetricValue"] { color: #ffe0b0 !important; font-family: 'Space Mono', monospace !important; }
+
+/* Cards de alerta */
 .alert-card { border-radius: 12px; padding: 16px 20px; margin: 8px 0; border-left: 4px solid; }
 .alert-verde   { background: #0a2016; border-color: #22c55e; color: #86efac; }
 .alert-amarelo { background: #1f1600; border-color: #eab308; color: #fde047; }
 .alert-laranja { background: #1f0d00; border-color: #f97316; color: #fdba74; }
 .alert-vermelho{ background: #1f0007; border-color: #ef4444; color: #fca5a5; }
-.stTabs [data-baseweb="tab-list"] { background-color: #0d1424; border-radius: 10px; padding: 4px; gap: 4px; }
-.stTabs [data-baseweb="tab"] { border-radius: 8px; color: #7fa8cc; font-weight: 600; padding: 8px 20px; }
-.stTabs [aria-selected="true"] { background-color: #1a3a5c !important; color: #60b8ff !important; }
-.main-title { font-family: 'Space Mono', monospace; font-size: 2rem; font-weight: 700; color: #60b8ff; letter-spacing: -0.02em; margin-bottom: 0; }
-.sub-title { color: #4a7fa0; font-size: 0.9rem; letter-spacing: 0.05em; margin-top: 4px; }
-.ndwi-card { border-radius: 12px; padding: 16px 20px; margin: 8px 0; border-left: 4px solid; background: #091a2a; border-color: #0ea5e9; color: #7dd3fc; }
-hr { border-color: #1e2d4a; }
+
+/* Tabs com estilo orbital */
+.stTabs [data-baseweb="tab-list"] {
+    background: linear-gradient(90deg, #0c1528 0%, #101c30 100%);
+    border-radius: 10px; padding: 4px; gap: 4px;
+    border: 1px solid rgba(255,120,0,0.2);
+}
+.stTabs [data-baseweb="tab"] { border-radius: 8px; color: #a0b8d8; font-weight: 600; padding: 8px 20px; }
+.stTabs [aria-selected="true"] {
+    background: linear-gradient(90deg, #1a2a10 0%, #2a1a05 100%) !important;
+    color: #ff9030 !important;
+    border: 1px solid rgba(255,120,0,0.5) !important;
+}
+
+/* Títulos principais */
+.main-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 2rem; font-weight: 700;
+    background: linear-gradient(90deg, #ff8c00, #ffb347, #4aa8ff);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    letter-spacing: -0.02em; margin-bottom: 0;
+}
+.sub-title { color: #7090b0; font-size: 0.85rem; letter-spacing: 0.12em; margin-top: 4px; text-transform: uppercase; }
+.sidebar-title {
+    font-family: 'Space Mono', monospace; font-size: 1.3rem; font-weight: 700;
+    background: linear-gradient(90deg, #ff8c00, #4aa8ff);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+/* Card NDWI */
+.ndwi-card {
+    border-radius: 12px; padding: 16px 20px; margin: 8px 0; border-left: 4px solid;
+    background: linear-gradient(135deg, #0d1220, #1a1005);
+    border-color: #ff8c00; color: #ffcc80;
+}
+
+/* Separador laranja */
+hr { border-color: rgba(255,120,0,0.25); }
+
+/* Borda brilhante no topo da sidebar */
+[data-testid="stSidebar"]::before {
+    content: '';
+    display: block;
+    height: 3px;
+    background: linear-gradient(90deg, #ff8c00, #4aa8ff, #ff8c00);
+    margin-bottom: 8px;
+}
+
+/* Órbita decorativa no cabeçalho */
+.orbit-badge {
+    display: inline-block;
+    border: 1px solid rgba(255,140,0,0.5);
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 0.72rem;
+    font-family: 'Space Mono', monospace;
+    color: #ff9030;
+    background: rgba(255,120,0,0.08);
+    letter-spacing: 0.08em;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -97,8 +179,20 @@ def classificar_ndwi(val):
 # SIDEBAR
 # ─────────────────────────────────────────────
 with st.sidebar:
-    st.markdown('<p class="main-title">🌊 FloodVision</p>', unsafe_allow_html=True)
-    st.markdown('<p class="sub-title">SISTEMA PREDITIVO DE ENCHENTES</p>', unsafe_allow_html=True)
+    st.markdown("""
+    <div style="text-align:center; padding: 12px 0 4px 0;">
+        <div style="font-size:2.2rem;">🛰️</div>
+        <p class="sidebar-title">FloodVision</p>
+        <p class="sub-title" style="font-size:0.68rem; line-height:1.5;">
+            DADOS ORBITAIS · INTELIGÊNCIA OPERACIONAL<br>GESTÃO DE DESASTRES
+        </p>
+        <div style="display:flex; justify-content:center; gap:6px; margin-top:6px;">
+            <span style="font-size:0.8rem;">🌍</span>
+            <span style="font-size:0.8rem;">🔭</span>
+            <span style="font-size:0.8rem;">📡</span>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     st.markdown("---")
 
     df_raw = carregar_dados()
@@ -122,7 +216,17 @@ with st.sidebar:
     limiar_umidade = st.slider("Umidade crítica (%)", 50, 100, 85)
 
     st.markdown("---")
-    st.success("📡 **DADOS REAIS**\nINPE via OpenWeather\nSão Paulo · Guarulhos · Santo André")
+    st.markdown("""
+    <div style="background:linear-gradient(135deg,#1a0f00,#001a2a); border:1px solid rgba(255,140,0,0.3);
+                border-radius:10px; padding:12px; text-align:center;">
+        <div style="color:#ff9030; font-size:0.8rem; font-weight:700;">📡 DADOS REAIS</div>
+        <div style="color:#7090b0; font-size:0.75rem; margin-top:4px;">INPE via OpenWeather</div>
+        <div style="color:#7090b0; font-size:0.72rem;">São Paulo · Guarulhos · Santo André</div>
+        <div style="color:#4aa8ff; font-size:0.7rem; margin-top:6px; font-family:'Space Mono',monospace;">
+            🛰 NDWI via Satélite
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     st.caption("FloodVision v2.0 · FIAP Global Solution 2025")
 
 
@@ -140,17 +244,31 @@ if cidade_selecionada != "Todas":
 # ─────────────────────────────────────────────
 col_titulo, col_status = st.columns([3, 1])
 with col_titulo:
-    st.markdown('<h1 class="main-title">🌊 FloodVision</h1>', unsafe_allow_html=True)
-    st.markdown('<p class="sub-title">MONITORAMENTO E PREDIÇÃO DE ENCHENTES URBANAS — GRANDE SÃO PAULO</p>', unsafe_allow_html=True)
+    st.markdown("""
+    <div style="display:flex; align-items:center; gap:14px;">
+        <div style="font-size:2.8rem; filter:drop-shadow(0 0 8px rgba(255,140,0,0.6));">🛰️</div>
+        <div>
+            <h1 class="main-title">FloodVision</h1>
+            <p class="sub-title">uma plataforma que transforma dados orbitais em inteligência operacional para gestão de desastres</p>
+        </div>
+    </div>
+    <div style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;">
+        <span class="orbit-badge">🌍 LEO ORBIT</span>
+        <span class="orbit-badge">📡 NDWI ATIVO</span>
+        <span class="orbit-badge">🔭 SENSORIAMENTO REMOTO</span>
+        <span class="orbit-badge">⚡ TEMPO REAL</span>
+    </div>
+    """, unsafe_allow_html=True)
 with col_status:
     agora = datetime.now().strftime("%d/%m/%Y %H:%M")
     st.markdown(f"""
     <div style="text-align:right; padding-top:8px;">
-        <span style="background:#0d2a1f; color:#22c55e; border:1px solid #22c55e;
+        <span style="background:rgba(255,120,0,0.12); color:#ff9030; border:1px solid rgba(255,120,0,0.5);
                      border-radius:20px; padding:4px 12px; font-size:0.75rem; font-family:'Space Mono',monospace;">
-            ● AO VIVO
+            ● TRANSMISSÃO ATIVA
         </span>
-        <br/><small style="color:#4a7fa0;">{agora}</small>
+        <br/><small style="color:#7090b0; font-family:'Space Mono',monospace;">{agora}</small>
+        <br/><small style="color:#4aa8ff; font-size:0.7rem;">🛸 COBERTURA ORBITAL</small>
     </div>
     """, unsafe_allow_html=True)
 
@@ -180,7 +298,7 @@ st.markdown("---")
 # TABS
 # ─────────────────────────────────────────────
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
-    "🗺️  Mapa de Risco",
+    "🌍  Mapa Orbital",
     "📈  Séries Temporais",
     "🛰️  Índice NDWI",
     "🤖  Predição IA",
@@ -192,7 +310,7 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs([
 # TAB 1 — MAPA
 # ══════════════════════════════════════════════
 with tab1:
-    st.subheader("Mapa de Risco — Grande São Paulo")
+    st.subheader("🌍 Cobertura Orbital — Risco Hidrológico · Grande São Paulo")
 
     coords = coordenadas_cidades()
     resumo_cidade = (
@@ -279,7 +397,7 @@ with tab1:
 # TAB 2 — SÉRIES TEMPORAIS
 # ══════════════════════════════════════════════
 with tab2:
-    st.subheader("Análise Temporal — Dados Horários")
+    st.subheader("📡 Séries Temporais — Telemetria Orbital e Dados de Solo")
 
     df_diario = (
         df.groupby(["data", "cidade_label"])
@@ -293,12 +411,10 @@ with tab2:
     )
 
     cor_cidades = {
-        "Sao Paulo":   "#60b8ff",
-        "Guarulhos":   "#a78bfa",
-        "Santo Andre": "#22c55e",
+        "Sao Paulo":   "#ff8c00",
+        "Guarulhos":   "#4aa8ff",
+        "Santo Andre": "#ff4fa0",
     }
-
-    # Gráfico 1 — Precipitação acumulada 24h
     fig_chuva = px.line(
         df_diario, x="data", y="precipitacao_24h", color="cidade_label",
         color_discrete_map=cor_cidades,
@@ -382,17 +498,17 @@ with tab2:
 # TAB 3 — NDWI
 # ══════════════════════════════════════════════
 with tab3:
-    st.subheader("🛰️ Índice NDWI — Monitoramento de Umidade do Solo")
+    st.subheader("🛰️ Índice NDWI — Sensoriamento Remoto de Umidade do Solo")
 
-    # Explicação do índice
     st.markdown("""
     <div class="ndwi-card">
-        <b>O que é o NDWI?</b><br>
-        O <b>Normalized Difference Water Index (NDWI)</b> é calculado a partir de imagens de satélite
-        e indica a presença de água na superfície e umidade do solo.
+        <b>🔭 O que é o NDWI e por que usamos satélites?</b><br>
+        O <b>Normalized Difference Water Index (NDWI)</b> é calculado a partir de imagens de satélites
+        de observação terrestre (como Landsat e Sentinel). Ele detecta a presença de água na superfície
+        e a umidade do solo com precisão — algo impossível apenas com sensores terrestres.
         Valores próximos de <b>+1</b> indicam corpos d'água ou enchentes; valores negativos indicam solo seco ou vegetação densa.
         <br><br>
-        <b>Faixas:</b>
+        <b>🌌 Faixas de classificação:</b>
         &nbsp;<span style="color:#ef4444">■</span> ≥ 0,2 Água/Enchente
         &nbsp;<span style="color:#f97316">■</span> 0 a 0,2 Úmido
         &nbsp;<span style="color:#eab308">■</span> -0,1 a 0 Transição
@@ -440,9 +556,9 @@ with tab3:
     )
 
     cor_cidades = {
-        "Sao Paulo":   "#60b8ff",
-        "Guarulhos":   "#a78bfa",
-        "Santo Andre": "#22c55e",
+        "Sao Paulo":   "#ff8c00",
+        "Guarulhos":   "#4aa8ff",
+        "Santo Andre": "#ff4fa0",
     }
 
     fig_ndwi_ts = px.line(
@@ -562,11 +678,11 @@ with tab3:
 # TAB 4 — PREDIÇÃO IA
 # ══════════════════════════════════════════════
 with tab4:
-    st.subheader("🤖 Predição de Risco — Modelo IA")
+    st.subheader("🤖 Predição de Risco — Modelo IA Alimentado por Dados Orbitais")
     st.info(
         "**Placeholder do modelo ML.** "
-        "Substitua `prever_risco()` pelo modelo Random Forest treinado com Scikit-Learn "
-        "quando estiver pronto."
+        "Substitua `prever_risco()` pelo modelo Random Forest treinado com Scikit-Learn. "
+        "O NDWI orbital já está incluído como feature preditora."
     )
 
     st.markdown("#### Simule um cenário")
@@ -654,7 +770,7 @@ with tab4:
 # TAB 5 — CENTRAL DE ALERTAS
 # ══════════════════════════════════════════════
 with tab5:
-    st.subheader("🚨 Central de Alertas — Grande São Paulo")
+    st.subheader("🚨 Central de Alertas — Inteligência Operacional para Gestão de Desastres")
 
     df_alertas = df[df["risco"] != "Baixo"].sort_values("data_hora", ascending=False).head(20)
 
