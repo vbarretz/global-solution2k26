@@ -11,8 +11,7 @@ import google.generativeai as genai
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
-
+load_dotenv("chave_api.env")
 genai.configure(
     api_key=os.getenv("GEMINI_API_KEY")
 )
@@ -968,7 +967,7 @@ with tab6:
 
         except Exception as e:
 
-            texto = f"Erro ao consultar Claude: {e}"
+            texto = f"Erro ao consultar Gemini: {e}"
 
         with st.chat_message("assistant"):
             st.markdown(texto)
